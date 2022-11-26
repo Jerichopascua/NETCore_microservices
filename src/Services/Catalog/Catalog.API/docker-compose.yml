@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  catalogdb:
+    image: mongo
+
+  portainer:
+    image: portainer/portainer-ce
+
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+
+  webstatus:
+    image: ${DOCKER_REGISTRY-}webstatus
+    build:
+      context: .
+      dockerfile: WebApps/WebStatus/Dockerfile
+
+volumes:
+  mongo_data:
+  portainer_data:
+  elasticsearch-data:   

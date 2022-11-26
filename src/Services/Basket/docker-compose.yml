@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  
+  basketdb:
+    image: redis:alpine
+
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+
+  
